@@ -1158,7 +1158,7 @@ var lineFormatter = function(cell, formatterParams, onRendered) {
   onRendered(function() {
     //instantiate sparkline after the cell element has been aded to the DOM
 
-    var val_arr = [0];
+    var val_arr = [500];
     var curr_val = cell.getValue();
     for (var key in curr_val) {
       val_arr.push(curr_val[key]); // val1 and etc...
@@ -1210,14 +1210,14 @@ var table = new Tabulator("#leaderboard", {
       field: "Total Problem Solved"
     },
     { title: "Rating", field: "Rating", minWidth: 150 },
-    {
+    /*{
       title: "Progress",
       field: "Rating",
       formatter: progressx,
       formatterParams: { color: colorfunc },
       sorter: "number",
       minWidth: 150
-    },
+    },*/
 
     {
       title: "Rating History",
