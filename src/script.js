@@ -1207,7 +1207,7 @@ var table = new Tabulator("#leaderboard", {
   data: tabledata, //assign data to table
   //layout: "fitColumns", //fit columns to width of table (optional)
   layout: "fitColumns",
-  responsiveLayout: "collapse",
+  //responsiveLayout: "collapse",
   //responsiveLayout: "collapse",
   columns: [
     {
@@ -1227,7 +1227,7 @@ var table = new Tabulator("#leaderboard", {
     },
     {
       title: "Total Problem Solved",
-      minWidth: 100,
+      minWidth: 180,
       field: "Total Problem Solved",
       resizable: false,
       headerSort: false
