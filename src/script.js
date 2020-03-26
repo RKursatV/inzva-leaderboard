@@ -1130,7 +1130,7 @@ var medalicon = function(value, data, type, params, component) {
   //params - the mutatorParams object from the column definition m
   //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
   var color;
-  switch (component["_column"]["field"]) {
+  switch (component._column.field) {
     case "Medals.Bronze":
       color = "#cd7f32";
       break;
@@ -1142,6 +1142,7 @@ var medalicon = function(value, data, type, params, component) {
       break;
     default:
       color = "#e5e4e2";
+      break;
     // code block
   }
   return (
@@ -1158,7 +1159,7 @@ var lineFormatter = function(cell, formatterParams, onRendered) {
   onRendered(function() {
     //instantiate sparkline after the cell element has been aded to the DOM
 
-    var val_arr = [0];
+    var val_arr = [500];
     var curr_val = cell.getValue();
     for (var key in curr_val) {
       val_arr.push(curr_val[key]); // val1 and etc...
@@ -1167,7 +1168,18 @@ var lineFormatter = function(cell, formatterParams, onRendered) {
     $(cell.getElement()).sparkline(val_arr, {
       width: "100%",
       type: "line",
-      disableTooltips: false
+
+      spotRadius: 4,
+      spotColor: false,
+      minSpotColor: false,
+      maxSpotColor: false,
+      disableTooltips: false,
+      valueSpots: $.range_map({
+        ":300": "green",
+        "300:500": "blue",
+        "501:700": "#FFCC00",
+        "701:": "red"
+      })
     });
   });
 };
@@ -1194,36 +1206,50 @@ var table = new Tabulator("#leaderboard", {
   height: 1000, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
   data: tabledata, //assign data to table
   //layout: "fitColumns", //fit columns to width of table (optional)
-  layout: "fitDataFill",
+  layout: "fitColumns",
+  responsiveLayout: "collapse",
   //responsiveLayout: "collapse",
   columns: [
     {
       title: "Username",
       field: "Username",
       formatter: getHyperLink,
-      minWidth: 200
+      minWidth: 200,
+      resizable: false,
+      headerSort: false
     },
-    { title: "Fullname", field: "FullName", minWidth: 200 },
+    {
+      title: "Fullname",
+      field: "FullName",
+      minWidth: 200,
+      resizable: false,
+      headerSort: false
+    },
     {
       title: "Total Problem Solved",
       minWidth: 100,
-      field: "Total Problem Solved"
+      field: "Total Problem Solved",
+      resizable: false,
+      headerSort: false
     },
-    { title: "Rating", field: "Rating", minWidth: 150 },
-    {
+    { title: "Rating", field: "Rating", minWidth: 150, resizable: false },
+    /*{
       title: "Progress",
       field: "Rating",
       formatter: progressx,
       formatterParams: { color: colorfunc },
       sorter: "number",
       minWidth: 150
-    },
+    },*/
 
     {
       title: "Rating History",
       field: "Rating History",
       width: 160,
-      formatter: lineFormatter
+      formatter: lineFormatter,
+      resizable: false,
+      headerSort: false,
+      responsive: false
     },
 
     {
@@ -1236,14 +1262,16 @@ var table = new Tabulator("#leaderboard", {
           field: "Medals.Bronze",
           width: 120,
           mutator: medalicon,
-          formatter: "html"
+          formatter: "html",
+          resizable: false
         },
         {
           title: "Silver",
           field: "Medals.Silver",
           width: 120,
           mutator: medalicon,
-          formatter: "html"
+          formatter: "html",
+          resizable: false
         },
         {
           title: "Gold",
@@ -1257,7 +1285,8 @@ var table = new Tabulator("#leaderboard", {
           mutator: medalicon,
           field: "Medals.Platinum",
           minWidth: 120,
-          formatter: "html"
+          formatter: "html",
+          resizable: false
         }
       ]
     }
