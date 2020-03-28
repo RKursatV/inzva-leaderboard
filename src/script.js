@@ -1661,7 +1661,7 @@ var table = new Tabulator("#leaderboard", {
         {
           title: "Bronze",
           field: "Medals.Bronze",
-          width: 120,
+          width: 99,
           mutator: medalicon,
           formatter: "html",
           resizable: false
@@ -1669,7 +1669,7 @@ var table = new Tabulator("#leaderboard", {
         {
           title: "Silver",
           field: "Medals.Silver",
-          width: 120,
+          width: 99,
           mutator: medalicon,
           formatter: "html",
           resizable: false
@@ -1678,14 +1678,14 @@ var table = new Tabulator("#leaderboard", {
           title: "Gold",
           mutator: medalicon,
           field: "Medals.Gold",
-          width: 120,
+          width: 99,
           formatter: "html"
         },
         {
           title: "Platinum",
           mutator: medalicon,
           field: "Medals.Platinum",
-          minWidth: 120,
+          minWidth: 99,
           formatter: "html",
           resizable: false
         }
