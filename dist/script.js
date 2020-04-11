@@ -89,9 +89,9 @@ function getHyperLink(cellComp, formatterParams, onRendered) {
 }
 
 var table = new Tabulator("#leaderboard", {
-  ajaxURL: "https://zarar.win/inzva/data.json", //ajax URL
+  ajaxURL: "https://zarar.win/inzva/data.json?v=1", //ajax URL
   //layout: "fitColumns", //fit columns to width of table (optional)
-  layout: "fitColumns",
+  //layout: "fitColumns",
   //responsiveLayout: "collapse",
   //responsiveLayout: "collapse",
   columns: [
